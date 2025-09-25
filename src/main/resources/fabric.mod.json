@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "pokebuilder",
+	"version": "${version}",
+	"name": "Pokebuilder",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/pokebuilder/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "com.thehairydog.pokebuilder.Pokebuilder",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		"pokebuilder.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.17.2",
+		"minecraft": "~1.21.1",
+		"java": ">=17",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*",
+        "cobblemon": "1.6.1"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
