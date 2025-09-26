@@ -32,7 +32,7 @@ class PokebuilderMainMenu(
             val itemStack = when(i) {
                 in 0..8 -> ItemStack(Blocks.WHITE_STAINED_GLASS_PANE)
                 9,17 -> ItemStack(Blocks.BLACK_STAINED_GLASS_PANE)
-                13 -> configurePokeEssence(CobblemonItems.RELIC_COIN)
+                13 -> configurePokeEssence(CobblemonItems.RELIC_COIN, serverPlayer)
                 in slotPositions -> {
                     val pokeIndex = slotPositions.indexOf(i)
                     val poke = party.get(pokeIndex)

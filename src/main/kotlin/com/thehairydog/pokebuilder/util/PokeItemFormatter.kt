@@ -6,6 +6,7 @@ import com.cobblemon.mod.common.item.CobblemonItem
 import com.cobblemon.mod.common.item.PokemonItem
 import com.cobblemon.mod.common.pokemon.Gender
 import com.cobblemon.mod.common.pokemon.Pokemon
+import com.thehairydog.pokebuilder.pokeessence.PokeEssenceHandler
 import com.thehairydog.pokebuilder.util.ColourUtil.boostColor
 import com.thehairydog.pokebuilder.util.ColourUtil.essenceColor
 import com.thehairydog.pokebuilder.util.ColourUtil.femaleColor
@@ -19,6 +20,7 @@ import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
 import net.minecraft.network.chat.TextColor
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemLore
 
@@ -122,22 +124,22 @@ object PokeItemFormatter {
         return pokeItem
     }
 
-    fun configurePokeEssence(item: CobblemonItem): ItemStack {
+    fun configurePokeEssence(item: CobblemonItem, player : ServerPlayer): ItemStack {
         val stack = ItemStack(item)
 
         // build the display name: "Poké" (red, bold) + "Essence" (white-ish, bold)
         val displayName = Component.literal("Poké")
-            .withStyle(Style.EMPTY.withColor(pokeColor).withBold(true).withItalic(false))
+            .withStyle(Style.EMPTY.withColor(pokeColor).withItalic(false))
             .append(
                 Component.literal("Essence")
-                    .withStyle(Style.EMPTY.withColor(essenceColor).withBold(true).withItalic(false))
+                    .withStyle(Style.EMPTY.withColor(essenceColor).withItalic(false))
             )
 
         // apply name to the ItemStack
         stack.set(DataComponents.CUSTOM_NAME, displayName)
 
         // example balance lore line (make sure to append a Component, not a raw String)
-        val pokeEssenceBalance = 1234
+        val pokeEssenceBalance = PokeEssenceHandler.get(player)
         val pokeEssenceLore: List<Component> = listOf(
             Component.literal("Balance: ").withStyle(Style.EMPTY.withColor(essenceColor).withItalic(false))
                 .append(Component.literal(pokeEssenceBalance.toString()).withStyle(Style.EMPTY.withColor(essenceColor).withItalic(false)))

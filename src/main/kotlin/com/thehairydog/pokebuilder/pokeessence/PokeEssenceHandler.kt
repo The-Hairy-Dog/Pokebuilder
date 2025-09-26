@@ -1,49 +1,36 @@
 package com.thehairydog.pokebuilder.pokeessence
 
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.server.level.ServerLevel
 
 object PokeEssenceHandler {
 
-    // Memory cache is optional, but safe for ticks/commands
-    private val playerCache = mutableMapOf<ServerPlayer, Int>()
-
-    /** Get essence for player (from cache if exists, else 0) */
-    fun get(player: ServerPlayer): Int = playerCache[player] ?: 0
-
-    /** Add essence and update cache */
-    fun add(player: ServerPlayer, amount: Int) {
-        val current = get(player)
-        playerCache[player] = current + amount
+    /** Get essence for player (from world saved data) */
+    fun get(player: ServerPlayer): Int {
+        val data = PokeEssenceData.get(player.serverLevel() as ServerLevel)
+        return data.get(player.uuid)
     }
 
-    /** Remove essence */
-    fun remove(player: ServerPlayer, amount: Int): Boolean {
-        val current = get(player)
-        return if (current >= amount) {
-            playerCache[player] = current - amount
-            true
-        } else false
-    }
-
-    /** Set essence directly */
+    /** Set essence for player */
     fun set(player: ServerPlayer, amount: Int) {
-        playerCache[player] = amount
+        val data = PokeEssenceData.get(player.serverLevel() as ServerLevel)
+        data.set(player.uuid, amount)
     }
 
-    /** Called from Mixin when player loads */
-    fun load(player: ServerPlayer, tag: CompoundTag) {
-        val value = tag.getInt("pokeessence")
-        playerCache[player] = value
+    /** Add essence for player */
+    fun add(player: ServerPlayer, amount: Int) {
+        val data = PokeEssenceData.get(player.serverLevel() as ServerLevel)
+        data.add(player.uuid, amount)
     }
 
-    /** Called from Mixin when player saves */
-    fun save(player: ServerPlayer, tag: CompoundTag) {
-        tag.putInt("pokeessence", get(player))
+    /** Remove essence for player */
+    fun remove(player: ServerPlayer, amount: Int): Boolean {
+        val data = PokeEssenceData.get(player.serverLevel() as ServerLevel)
+        return data.remove(player.uuid, amount)
     }
 
-    /** Clear memory cache on disconnect */
+    /** Clear memory cache is now unnecessary */
     fun clear(player: ServerPlayer) {
-        playerCache.remove(player)
+        // No-op since we rely entirely on SavedData
     }
 }

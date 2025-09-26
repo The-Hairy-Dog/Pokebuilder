@@ -1,9 +1,8 @@
 {
 	"required": true,
-	"package": "com.thehairydog.pokebuilder.mixin",
+	"package": "com.thehairydog.pokebuilder",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ServerPlayerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
