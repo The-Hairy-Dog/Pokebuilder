@@ -5,57 +5,45 @@ import net.minecraft.server.level.ServerPlayer
 
 object PokeEssenceHandler {
 
-    private const val TAG_KEY = "pokeessence"
-    private val playerEssence = mutableMapOf<ServerPlayer, Int>()
+    // Memory cache is optional, but safe for ticks/commands
+    private val playerCache = mutableMapOf<ServerPlayer, Int>()
 
-    /** Get current essence */
-    fun get(player: ServerPlayer): Int {
-        return playerEssence[player] ?: 0
-    }
+    /** Get essence for player (from cache if exists, else 0) */
+    fun get(player: ServerPlayer): Int = playerCache[player] ?: 0
 
-    /** Add essence and save immediately */
+    /** Add essence and update cache */
     fun add(player: ServerPlayer, amount: Int) {
         val current = get(player)
-        val newTotal = current + amount
-        playerEssence[player] = newTotal
-        save(player) // Save immediately to NBT
+        playerCache[player] = current + amount
     }
 
-    /** Remove essence if enough exists, returns success */
+    /** Remove essence */
     fun remove(player: ServerPlayer, amount: Int): Boolean {
         val current = get(player)
         return if (current >= amount) {
-            val newTotal = current - amount
-            playerEssence[player] = newTotal
-            save(player)
+            playerCache[player] = current - amount
             true
-        } else {
-            false
-        }
+        } else false
     }
 
     /** Set essence directly */
     fun set(player: ServerPlayer, amount: Int) {
-        playerEssence[player] = amount
-        save(player)
+        playerCache[player] = amount
     }
 
-    /** Save current value into player's NBT */
-    private fun save(player: ServerPlayer) {
-        val tag = CompoundTag()
-        tag.putInt(TAG_KEY, get(player))
-        player.addAdditionalSaveData(tag)
+    /** Called from Mixin when player loads */
+    fun load(player: ServerPlayer, tag: CompoundTag) {
+        val value = tag.getInt("pokeessence")
+        playerCache[player] = value
     }
 
-    /** Load from NBT on player join / load */
-    fun load(player: ServerPlayer, nbt: CompoundTag) {
-        val value = nbt.getInt(TAG_KEY)
-        playerEssence[player] = value
+    /** Called from Mixin when player saves */
+    fun save(player: ServerPlayer, tag: CompoundTag) {
+        tag.putInt("pokeessence", get(player))
     }
 
-    /** Clear memory when player disconnects */
+    /** Clear memory cache on disconnect */
     fun clear(player: ServerPlayer) {
-        playerEssence.remove(player)
+        playerCache.remove(player)
     }
-
 }

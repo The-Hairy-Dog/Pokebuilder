@@ -6,7 +6,6 @@ import com.thehairydog.pokebuilder.pokeessence.PokeEssenceHandler
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
-import net.minecraft.nbt.CompoundTag
 import org.slf4j.LoggerFactory
 
 object Pokebuilder : ModInitializer {
@@ -25,20 +24,14 @@ object Pokebuilder : ModInitializer {
         }
 
         // PlayerJoinEvent (or ServerPlayer constructor) -> load NBT
-        ServerPlayConnectionEvents.JOIN.register { handler, sender, server ->
-            val player = handler.player
-            val tag = CompoundTag()
-            player.addAdditionalSaveData(tag) // fills 'tag' with the player's data
-            PokeEssenceHandler.load(player, tag)
+        ServerPlayConnectionEvents.JOIN.register { handler, _, _ ->
+            println("${handler.player.name.string} joined, poke essence = ${PokeEssenceHandler.get(handler.player)}")
         }
 
-
-// PlayerQuitEvent -> clear memory
         ServerPlayConnectionEvents.DISCONNECT.register { handler, server ->
             PokeEssenceHandler.clear(handler.player)
         }
 
-// Optional: On server tick, you could also periodically save everyone
 
     }
 }
