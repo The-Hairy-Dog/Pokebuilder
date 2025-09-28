@@ -1,4 +1,4 @@
-package com.thehairydog.pokebuilder.gui
+package com.thehairydog.pokebuilder.gui.slotUtil
 
 import net.minecraft.world.Container
 import net.minecraft.world.entity.player.Player

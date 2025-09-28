@@ -6,13 +6,15 @@ object ColourUtil {
 
     // Base colors (constants)
     val pokeColor: TextColor = TextColor.fromRgb(0xEE1515)   // Pokémon red
+    val natureColor : TextColor = TextColor.fromRgb(0x26A13C)
     val essenceColor: TextColor = TextColor.fromRgb(0xF8F8FF) // ghost white
     val white: TextColor = TextColor.fromRgb(0xFFFFFF)
     val boostColor: TextColor = TextColor.fromRgb(0xFF5555)
     val lowerColor: TextColor = TextColor.fromRgb(0x5555FF)
     val maleColor: TextColor = TextColor.fromRgb(0x87CEFA)
     val femaleColor: TextColor = TextColor.fromRgb(0xFFB6C1)
-    val genderlessColor: TextColor = white
+    val genderlessColor: TextColor = TextColor.fromRgb(0xF5F5DC)
+    val essenceCurrencyColor : TextColor = TextColor.fromRgb(0x00FFFF)
 
     // Type colors map (initialized once)
     val typeColors: Map<String, TextColor> = mapOf(
