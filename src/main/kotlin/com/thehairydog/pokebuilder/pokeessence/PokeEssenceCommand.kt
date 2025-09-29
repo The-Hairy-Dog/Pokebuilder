@@ -1,5 +1,8 @@
 package com.thehairydog.pokebuilder.pokeessence
 
+import com.cobblemon.mod.common.api.storage.pc.PCBox
+import com.cobblemon.mod.common.client.gui.battle.BattleGUI
+import com.cobblemon.mod.common.pokemon.Pokemon
 import com.mojang.brigadier.arguments.IntegerArgumentType
 import com.mojang.brigadier.builder.LiteralArgumentBuilder
 import net.minecraft.commands.CommandSourceStack
@@ -61,6 +64,7 @@ object PokeEssenceCommand {
                             { Component.literal("You have $current PokéEssence") },
                             false
                         )
+
                         1
                     }
             )

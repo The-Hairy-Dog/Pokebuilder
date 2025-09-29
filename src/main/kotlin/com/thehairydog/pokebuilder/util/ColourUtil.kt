@@ -15,6 +15,16 @@ object ColourUtil {
     val femaleColor: TextColor = TextColor.fromRgb(0xFFB6C1)
     val genderlessColor: TextColor = TextColor.fromRgb(0xF5F5DC)
     val essenceCurrencyColor : TextColor = TextColor.fromRgb(0x00FFFF)
+    val confirmColor : TextColor = TextColor.fromRgb(0x26C543)
+    val cancelColor : TextColor = TextColor.fromRgb(0xFF5555)
+    val hpColor: TextColor = TextColor.fromRgb(0xFFB6C1)      // Baby pink (HP Up - red lid)
+    val attackColor: TextColor = TextColor.fromRgb(0xFFD580)  // Pastel orange (Protein - orange lid)
+    val defenseColor: TextColor = TextColor.fromRgb(0xD3D3D3) // Light gray (Iron - gray lid)
+    val spAttackColor: TextColor = TextColor.fromRgb(0xADD8E6) // Baby blue (Calcium - blue lid)
+    val spDefenseColor: TextColor = TextColor.fromRgb(0x90EE90) // Pastel green (Zinc - green lid)
+    val speedColor: TextColor = TextColor.fromRgb(0xFFFACD)    // Light yellow (Carbos - yellow lid)
+    val placeholderColor: TextColor = TextColor.fromRgb(0x808080)
+    val magenta : TextColor = TextColor.fromRgb(0xC80176)
 
     // Type colors map (initialized once)
     val typeColors: Map<String, TextColor> = mapOf(

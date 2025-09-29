@@ -1,7 +1,7 @@
 package com.thehairydog.pokebuilder.gui
 
-import com.cobblemon.mod.common.item.PokemonItem
 import com.cobblemon.mod.common.pokemon.Pokemon
+import com.thehairydog.pokebuilder.gui.editors.PokeBuilderIVsEditor
 import com.thehairydog.pokebuilder.gui.editors.PokeBuilderNatureEditor
 import com.thehairydog.pokebuilder.util.ColourUtil
 import com.thehairydog.pokebuilder.util.ColourUtil.essenceColor
@@ -20,7 +20,7 @@ import net.minecraft.world.item.ItemStack
 
 object PokebuilderOpenMenus {
 
-    val pokeBuilderMenuTitle = Component.literal("Poké")
+    val pokeBuilderMenuTitle: Component = Component.literal("Poké")
         .withStyle(Style.EMPTY.withColor(pokeColor).withBold(true).withItalic(false))
         .append(
             Component.literal(" Builder")
@@ -93,7 +93,17 @@ object PokebuilderOpenMenus {
         })
     }
 
-    fun openIVsPage() {}
+    fun openIVsPage(player: ServerPlayer, pokemon: Pokemon) {
+        player.openMenu(object : MenuProvider {
+            override fun getDisplayName(): Component {
+                return Component.literal("IV Builder").withStyle(Style.EMPTY.withColor(white).withBold(true))
+            }
+
+            override fun createMenu(syncId: Int, inventory: Inventory, playerEntity: Player): AbstractContainerMenu {
+                return PokeBuilderIVsEditor(syncId, player, pokemon)
+            }
+        })
+    }
 
     fun openEVsPage() {}
 
@@ -125,7 +135,7 @@ object PokebuilderOpenMenus {
                 inventory: Inventory,
                 playerEntity: Player
             ): AbstractContainerMenu {
-                return PokeBuilderConfirmInfusement(syncId, player, pokemon, cost, itemStack, onConfirm, onCancel)
+                return PokeBuilderConfirmInfusion(syncId, player, pokemon, cost, itemStack, onConfirm, onCancel)
             }
         })
     }

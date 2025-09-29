@@ -1,7 +1,6 @@
 package com.thehairydog.pokebuilder.gui
 
 import ClickableSlot
-import com.cobblemon.mod.common.item.PokemonItem
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.thehairydog.pokebuilder.gui.slotUtil.LockedSlot
 import com.thehairydog.pokebuilder.util.PokeItemFormatter
@@ -46,7 +45,7 @@ class PokebuilderEditMenu(
             } else {
                 ClickableSlot(container, i, slotX, slotY) {
                     when (i) {
-                        20 -> PokebuilderOpenMenus.openIVsPage()
+                        20 -> PokebuilderOpenMenus.openIVsPage(player, pokemon)
                         24 -> PokebuilderOpenMenus.openGenderPage()
                         11 -> PokebuilderOpenMenus.openNaturePage(player, pokemon)
                         29 -> PokebuilderOpenMenus.openEVsPage()

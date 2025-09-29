@@ -465,7 +465,7 @@ object PokeItemFormatter {
         }
 
         // Interactive hint
-        val finalLore = movesLore + Component.literal("Click to edit")
+        val finalLore = movesLore + Component.literal("") + Component.literal("Click to edit")
             .withStyle(Style.EMPTY.withColor(white).withItalic(true))
 
         itemStack.set(DataComponents.LORE, ItemLore(finalLore))
@@ -476,7 +476,7 @@ object PokeItemFormatter {
     fun configureNatureItem(cobblemonItem: MintItem, nature : Nature) : ItemStack {
         val itemStack = ItemStack(cobblemonItem)
 
-        itemStack.set(DataComponents.CUSTOM_NAME, Component.translatable(nature.displayName))
+        itemStack.set(DataComponents.CUSTOM_NAME, Component.translatable(nature.displayName).withStyle(Style.EMPTY.withItalic(false)))
 
         val boosted = nature.increasedStat
         val lowered = nature.decreasedStat
@@ -490,7 +490,7 @@ object PokeItemFormatter {
                     lowerColor).withItalic(false)))
                 .append(Component.literal(")").withStyle(Style.EMPTY.withColor(white).withItalic(false)))
         } else {
-            Component.literal("(neutral)").withStyle(Style.EMPTY)
+            Component.literal("(neutral)").withStyle(Style.EMPTY.withColor(white).withItalic(false))
         }
         val itemLore: List<Component> = listOf(
             natureStats,
