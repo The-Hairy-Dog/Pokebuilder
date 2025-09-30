@@ -1,17 +1,17 @@
-package com.thehairydog.pokebuilder.gui
+package com.thehairydog.pokeinfuser.gui
 
 import ClickableSlot
 import com.cobblemon.mod.common.pokemon.Pokemon
-import com.thehairydog.pokebuilder.gui.PokebuilderOpenMenus.openEditPage
-import com.thehairydog.pokebuilder.gui.slotUtil.LockedSlot
-import com.thehairydog.pokebuilder.pokeessence.PokeEssenceHandler
-import com.thehairydog.pokebuilder.util.ColourUtil
-import com.thehairydog.pokebuilder.util.ColourUtil.essenceCurrencyColor
-import com.thehairydog.pokebuilder.util.ColourUtil.white
+import com.thehairydog.pokeinfuser.gui.PokeInfuserOpenMenus.openEditPage
+import com.thehairydog.pokeinfuser.gui.slotUtil.LockedSlot
+import com.thehairydog.pokeinfuser.pokeessence.PokeEssenceHandler
+import com.thehairydog.pokeinfuser.util.ColourUtil
+import com.thehairydog.pokeinfuser.util.ColourUtil.essenceCurrencyColor
+import com.thehairydog.pokeinfuser.util.ColourUtil.white
+import com.thehairydog.pokeinfuser.util.SoundUtil
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
-import net.minecraft.network.chat.TextColor
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Player
@@ -21,7 +21,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.component.ItemLore
 
-class PokeBuilderConfirmInfusion(
+class PokeInfuserConfirmInfusion(
     syncId: Int,
     private val player: ServerPlayer,
     private val pokemon: Pokemon,
@@ -101,6 +101,7 @@ class PokeBuilderConfirmInfusion(
             onConfirm(pokemon, player)
             player.sendSystemMessage(Component.literal("Infusion successful!"))
             openEditPage(player, pokemon)
+            SoundUtil.playPurchaseSound(player)
         } else {
             player.sendSystemMessage(Component.literal("Not enough Essence!"))
         }
@@ -108,6 +109,7 @@ class PokeBuilderConfirmInfusion(
 
     fun cancel() {
         onCancel(player)
+        SoundUtil.playCancelSound(player)
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack? = ItemStack.EMPTY

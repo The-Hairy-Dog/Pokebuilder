@@ -1,4 +1,4 @@
-package com.thehairydog.pokebuilder.pokeessence
+package com.thehairydog.pokeinfuser.pokeessence
 
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag

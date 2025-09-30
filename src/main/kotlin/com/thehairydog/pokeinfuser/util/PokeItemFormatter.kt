@@ -1,4 +1,4 @@
-package com.thehairydog.pokebuilder.util
+package com.thehairydog.pokeinfuser.util
 
 import com.cobblemon.mod.common.CobblemonItems
 import com.cobblemon.mod.common.api.moves.MoveSet
@@ -11,16 +11,16 @@ import com.cobblemon.mod.common.item.interactive.MintItem
 import com.cobblemon.mod.common.pokemon.Gender
 import com.cobblemon.mod.common.pokemon.Nature
 import com.cobblemon.mod.common.pokemon.Pokemon
-import com.thehairydog.pokebuilder.pokeessence.PokeEssenceHandler
-import com.thehairydog.pokebuilder.util.ColourUtil.boostColor
-import com.thehairydog.pokebuilder.util.ColourUtil.essenceColor
-import com.thehairydog.pokebuilder.util.ColourUtil.femaleColor
-import com.thehairydog.pokebuilder.util.ColourUtil.genderlessColor
-import com.thehairydog.pokebuilder.util.ColourUtil.lowerColor
-import com.thehairydog.pokebuilder.util.ColourUtil.maleColor
-import com.thehairydog.pokebuilder.util.ColourUtil.pokeColor
-import com.thehairydog.pokebuilder.util.ColourUtil.typeColors
-import com.thehairydog.pokebuilder.util.ColourUtil.white
+import com.thehairydog.pokeinfuser.pokeessence.PokeEssenceHandler
+import com.thehairydog.pokeinfuser.util.ColourUtil.boostColor
+import com.thehairydog.pokeinfuser.util.ColourUtil.essenceColor
+import com.thehairydog.pokeinfuser.util.ColourUtil.femaleColor
+import com.thehairydog.pokeinfuser.util.ColourUtil.genderlessColor
+import com.thehairydog.pokeinfuser.util.ColourUtil.lowerColor
+import com.thehairydog.pokeinfuser.util.ColourUtil.maleColor
+import com.thehairydog.pokeinfuser.util.ColourUtil.pokeColor
+import com.thehairydog.pokeinfuser.util.ColourUtil.typeColors
+import com.thehairydog.pokeinfuser.util.ColourUtil.white
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
@@ -142,7 +142,7 @@ object PokeItemFormatter {
 
         // build the display name: "Poké" (red, bold) + "Essence" (white-ish, bold)
         val displayName = Component.literal("Poké")
-            .withStyle(Style.EMPTY.withColor(pokeColor).withItalic(false).withBold(true))
+            .withStyle(Style.EMPTY.withColor(white).withItalic(false).withBold(true))
             .append(
                 Component.literal("Essence")
                     .withStyle(Style.EMPTY.withColor(essenceColor).withItalic(false).withBold(true))

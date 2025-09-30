@@ -1,24 +1,25 @@
 {
 	"schemaVersion": 1,
-	"id": "pokebuilder",
+	"id": "pokeinfuser",
 	"version": "${version}",
-	"name": "Pokebuilder",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "PokeInfuser",
+	"description": "This mod infuses essence into cobblemon to change stats through a gui system.",
 	"authors": [
-		"Me!"
+		"THE_WILLANATOR"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/pokebuilder/icon.png",
+	"icon": "assets/pokeinfuser/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			{
-				"value": "com.thehairydog.pokebuilder.Pokebuilder",
-				"adapter": "kotlin"
+              "value": "com.thehairydog.pokeinfuser.PokeInfuser",
+
+              "adapter": "kotlin"
 			}
 		]
 	},

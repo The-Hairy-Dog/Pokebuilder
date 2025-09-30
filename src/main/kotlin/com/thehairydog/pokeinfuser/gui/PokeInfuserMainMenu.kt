@@ -1,12 +1,13 @@
-package com.thehairydog.pokebuilder.gui
+package com.thehairydog.pokeinfuser.gui
 
 import com.cobblemon.mod.common.CobblemonItems
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.party
-import com.thehairydog.pokebuilder.gui.slotUtil.LockedSlot
-import com.thehairydog.pokebuilder.util.ColourUtil
-import com.thehairydog.pokebuilder.util.PokeItemFormatter.configurePokeEssence
-import com.thehairydog.pokebuilder.util.PokeItemFormatter.configurePokemonForPokebuilder
+import com.thehairydog.pokeinfuser.gui.slotUtil.LockedSlot
+import com.thehairydog.pokeinfuser.util.ColourUtil
+import com.thehairydog.pokeinfuser.util.PokeItemFormatter.configurePokeEssence
+import com.thehairydog.pokeinfuser.util.PokeItemFormatter.configurePokemonForPokebuilder
+import com.thehairydog.pokeinfuser.util.SoundUtil
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
@@ -20,7 +21,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.block.Blocks
 
-class PokebuilderMainMenu(
+class PokeInfuserMainMenu(
     syncId: Int,
     serverPlayer: ServerPlayer
 ) : AbstractContainerMenu(MenuType.GENERIC_9x3, syncId) {
@@ -97,7 +98,8 @@ class PokebuilderMainMenu(
         val pokemon = slotToPokemon[slotId] ?: return
 
         (player as? ServerPlayer)?.let {
-            PokebuilderOpenMenus.openEditPage(it, pokemon)
+            PokeInfuserOpenMenus.openEditPage(it, pokemon)
+            SoundUtil.playClickSound(player)
         }
     }
 

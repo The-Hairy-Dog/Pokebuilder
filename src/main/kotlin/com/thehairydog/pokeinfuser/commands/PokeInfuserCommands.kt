@@ -1,18 +1,18 @@
-package com.thehairydog.pokebuilder.commands
+package com.thehairydog.pokeinfuser.commands
 
 import com.mojang.brigadier.CommandDispatcher
-import com.thehairydog.pokebuilder.gui.PokebuilderOpenMenus
+import com.thehairydog.pokeinfuser.gui.PokeInfuserOpenMenus
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.Commands
 
-object PokebuilderCommands {
+object PokeInfuserCommands {
 
     fun register(dispatcher: CommandDispatcher<CommandSourceStack>) {
         dispatcher.register(
-            Commands.literal("pokebuilder")
+            Commands.literal("pokeinfuser")
                 .executes { context ->
                     val player = context.source.player ?: return@executes 0
-                    PokebuilderOpenMenus.openMainPage(player)
+                    PokeInfuserOpenMenus.openMainPage(player)
                     1
                 }
         )

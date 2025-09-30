@@ -1,10 +1,11 @@
-package com.thehairydog.pokebuilder.gui
+package com.thehairydog.pokeinfuser.gui
 
 import ClickableSlot
 import com.cobblemon.mod.common.pokemon.Pokemon
-import com.thehairydog.pokebuilder.gui.slotUtil.LockedSlot
-import com.thehairydog.pokebuilder.util.PokeItemFormatter
-import com.thehairydog.pokebuilder.util.PokeItemFormatter.configurePokemonForPokebuilder
+import com.thehairydog.pokeinfuser.gui.slotUtil.LockedSlot
+import com.thehairydog.pokeinfuser.util.PokeItemFormatter
+import com.thehairydog.pokeinfuser.util.PokeItemFormatter.configurePokemonForPokebuilder
+import com.thehairydog.pokeinfuser.util.SoundUtil
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Player
@@ -12,7 +13,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.ItemStack
 
-class PokebuilderEditMenu(
+class PokeInfuserEditMenu(
     syncId: Int,
     player: ServerPlayer,
     pokemon: Pokemon
@@ -41,27 +42,37 @@ class PokebuilderEditMenu(
             }
 
             val slot = if (itemStack.isEmpty) {
-                LockedSlot(container, i, slotX, slotY) // or a normal slot
+                LockedSlot(container, i, slotX, slotY)
             } else {
                 ClickableSlot(container, i, slotX, slotY) {
                     when (i) {
-                        20 -> PokebuilderOpenMenus.openIVsPage(player, pokemon)
-                        24 -> PokebuilderOpenMenus.openGenderPage()
-                        11 -> PokebuilderOpenMenus.openNaturePage(player, pokemon)
-                        29 -> PokebuilderOpenMenus.openEVsPage()
-                        15 -> PokebuilderOpenMenus.openLevelsPage()
-                        33 -> PokebuilderOpenMenus.openAbilityPage()
-                        19 -> PokebuilderOpenMenus.openMovesPage()
-                        25 -> PokebuilderOpenMenus.openShinyPage()
-                        40 -> PokebuilderOpenMenus.openMainPage(player)
+                        40 -> {
+                            SoundUtil.playBackSound(player)
+                            PokeInfuserOpenMenus.openMainPage(player)
+                        }
+                        else -> {
+                            SoundUtil.playClickSound(player)
+
+                            when (i) {
+                                20 -> PokeInfuserOpenMenus.openIVsPage(player, pokemon)
+                                24 -> PokeInfuserOpenMenus.openGenderPage()
+                                11 -> PokeInfuserOpenMenus.openNaturePage(player, pokemon)
+                                29 -> PokeInfuserOpenMenus.openEVsPage(player, pokemon)
+                                15 -> PokeInfuserOpenMenus.openLevelsPage()
+                                33 -> PokeInfuserOpenMenus.openAbilityPage()
+                                19 -> PokeInfuserOpenMenus.openMovesPage()
+                                25 -> PokeInfuserOpenMenus.openShinyPage()
+                            }
+                        }
                     }
                 }
             }
 
+
+
             container.setItem(i, itemStack)
             addSlot(slot)
         }
-
 
         val playerInventory = player.inventory
         for(rowIndex in 0 until 3) {

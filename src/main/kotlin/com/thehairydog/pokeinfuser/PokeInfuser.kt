@@ -1,22 +1,22 @@
-package com.thehairydog.pokebuilder
+package com.thehairydog.pokeinfuser
 
-import com.thehairydog.pokebuilder.commands.PokebuilderCommands
-import com.thehairydog.pokebuilder.pokeessence.PokeEssenceCommand
-import com.thehairydog.pokebuilder.pokeessence.PokeEssenceData
+import com.thehairydog.pokeinfuser.commands.PokeInfuserCommands
+import com.thehairydog.pokeinfuser.pokeessence.PokeEssenceCommand
+import com.thehairydog.pokeinfuser.pokeessence.PokeEssenceData
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import org.slf4j.LoggerFactory
 
-object Pokebuilder : ModInitializer {
-    private val logger = LoggerFactory.getLogger("pokebuilder")
+object PokeInfuser : ModInitializer {
+    private val logger = LoggerFactory.getLogger("pokeinfuser")
 
     override fun onInitialize() {
-        logger.info("Initialising Pokebuilder...")
+        logger.info("Initialising PokéInfuser...")
 
         // Register custom commands
         CommandRegistrationCallback.EVENT.register { dispatcher, _, _ ->
-            PokebuilderCommands.register(dispatcher)
+            PokeInfuserCommands.register(dispatcher)
             dispatcher.register(PokeEssenceCommand.register())
         }
 
