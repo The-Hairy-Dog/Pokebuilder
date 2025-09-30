@@ -1,9 +1,13 @@
 package com.thehairydog.pokeinfuser.gui
 
 import com.cobblemon.mod.common.pokemon.Pokemon
+import com.thehairydog.pokeinfuser.gui.editors.PokeInfuserAbilityEditor
 import com.thehairydog.pokeinfuser.gui.editors.PokeInfuserEVsEditor
+import com.thehairydog.pokeinfuser.gui.editors.PokeInfuserGenderEditor
 import com.thehairydog.pokeinfuser.gui.editors.PokeInfuserIVsEditor
+import com.thehairydog.pokeinfuser.gui.editors.PokeInfuserLevelEditor
 import com.thehairydog.pokeinfuser.gui.editors.PokeInfuserNatureEditor
+import com.thehairydog.pokeinfuser.gui.editors.PokeInfuserShinyEditor
 import com.thehairydog.pokeinfuser.util.ColourUtil
 import com.thehairydog.pokeinfuser.util.ColourUtil.essenceColor
 import com.thehairydog.pokeinfuser.util.ColourUtil.mainInfusionColour
@@ -142,10 +146,106 @@ object PokeInfuserOpenMenus {
     }
 
     fun openMovesPage() {}
-    fun openLevelsPage() {}
-    fun openGenderPage() {}
-    fun openShinyPage() {}
-    fun openAbilityPage() {}
+
+    fun openLevelsPage(player: ServerPlayer, pokemon: Pokemon) {
+        player.openMenu(object : MenuProvider {
+            override fun getDisplayName(): Component {
+                return Component.literal("Poké")
+                    .withStyle(Style.EMPTY.withColor(white).withBold(true))
+                    .append(
+                        Component.literal("Infuser")
+                            .withStyle(Style.EMPTY.withColor(mainInfusionColour).withBold(true))
+                    )
+                    .append(
+                        Component.literal(" | ")
+                            .withStyle(Style.EMPTY.withColor(white).withBold(true))
+                    )
+                    .append(
+                        Component.literal("Levels")
+                            .withStyle(Style.EMPTY.withColor(ColourUtil.secondaryInfusionColour).withBold(true))
+                    )
+            }
+
+            override fun createMenu(syncId: Int, inventory: Inventory, playerEntity: Player): AbstractContainerMenu {
+                return PokeInfuserLevelEditor(syncId, player, pokemon)
+            }
+        })
+    }
+
+    fun openGenderPage(player: ServerPlayer, pokemon: Pokemon) {
+        player.openMenu(object : MenuProvider {
+            override fun getDisplayName(): Component {
+                return Component.literal("Poké")
+                    .withStyle(Style.EMPTY.withColor(white).withBold(true))
+                    .append(
+                        Component.literal("Infuser")
+                            .withStyle(Style.EMPTY.withColor(mainInfusionColour).withBold(true))
+                    )
+                    .append(
+                        Component.literal(" | ")
+                            .withStyle(Style.EMPTY.withColor(white).withBold(true))
+                    )
+                    .append(
+                        Component.literal("Gender")
+                            .withStyle(Style.EMPTY.withColor(ColourUtil.secondaryInfusionColour).withBold(true))
+                    )
+            }
+
+            override fun createMenu(syncId: Int, inventory: Inventory, playerEntity: Player): AbstractContainerMenu {
+                return PokeInfuserGenderEditor(syncId, player, pokemon)
+            }
+        })
+    }
+
+    fun openShinyPage(player: ServerPlayer, pokemon: Pokemon) {
+        player.openMenu(object : MenuProvider {
+            override fun getDisplayName(): Component {
+                return Component.literal("Poké")
+                    .withStyle(Style.EMPTY.withColor(white).withBold(true))
+                    .append(
+                        Component.literal("Infuser")
+                            .withStyle(Style.EMPTY.withColor(mainInfusionColour).withBold(true))
+                    )
+                    .append(
+                        Component.literal(" | ")
+                            .withStyle(Style.EMPTY.withColor(white).withBold(true))
+                    )
+                    .append(
+                        Component.literal("Shiny")
+                            .withStyle(Style.EMPTY.withColor(ColourUtil.gold).withBold(true))
+                    )
+            }
+
+            override fun createMenu(syncId: Int, inventory: Inventory, playerEntity: Player): AbstractContainerMenu {
+                return PokeInfuserShinyEditor(syncId, player, pokemon)
+            }
+        })
+    }
+
+    fun openAbilityPage(player: ServerPlayer, pokemon: Pokemon) {
+        player.openMenu(object : MenuProvider {
+            override fun getDisplayName(): Component {
+                return Component.literal("Poké")
+                    .withStyle(Style.EMPTY.withColor(white).withBold(true))
+                    .append(
+                        Component.literal("Infuser")
+                            .withStyle(Style.EMPTY.withColor(mainInfusionColour).withBold(true))
+                    )
+                    .append(
+                        Component.literal(" | ")
+                            .withStyle(Style.EMPTY.withColor(white).withBold(true))
+                    )
+                    .append(
+                        Component.literal("Abilities")
+                            .withStyle(Style.EMPTY.withColor(ColourUtil.pokeColor).withBold(true))
+                    )
+            }
+
+            override fun createMenu(syncId: Int, inventory: Inventory, playerEntity: Player): AbstractContainerMenu {
+                return PokeInfuserAbilityEditor(syncId, player, pokemon)
+            }
+        })
+    }
 
     fun openConfirmInfuse(
         pokemon: Pokemon,
